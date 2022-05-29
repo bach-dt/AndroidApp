@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_frame"
+    tools:context=".SelectEquipment">
+
+    <TextView
+        android:id="@+id/Select_equip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn thiết bị"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038" />
+
+    <Button
+        android:id="@+id/exit__"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:backgroundTint="@android:color/transparent"
+        android:stateListAnimator="@null"
+        android:text="Thoát"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.978"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <ImageButton
+        android:id="@+id/ac_romote"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="92dp"
+        android:background="@drawable/ac_remote"
+        app:layout_constraintStart_toStartOf="@+id/hdmi"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/hdmi"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/hdmi"
+        app:layout_constraintStart_toStartOf="@+id/laser_pen"
+        app:layout_constraintTop_toBottomOf="@+id/ac_romote" />
+
+    <ImageButton
+        android:id="@+id/laser_pen"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/laser_pen"
+        app:layout_constraintStart_toStartOf="@+id/micro"
+        app:layout_constraintTop_toBottomOf="@+id/hdmi" />
+
+    <CheckBox
+        android:id="@+id/laser_pen_cb"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:buttonTint="@android:color/background_dark"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="@+id/laser_pen"
+        app:layout_constraintStart_toStartOf="@+id/micro_cb"
+        app:layout_constraintTop_toTopOf="@+id/laser_pen"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <ImageButton
+        android:id="@+id/micro"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/micro"
+        app:layout_constraintTop_toBottomOf="@+id/laser_pen"
+        tools:layout_editor_absoluteX="46dp" />
+
+    <CheckBox
+        android:id="@+id/micro_cb"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:buttonTint="@android:color/background_dark"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="@+id/micro"
+        app:layout_constraintEnd_toEndOf="@+id/micro"
+        app:layout_constraintTop_toTopOf="@+id/micro"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/ac_romote_cb"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:buttonTint="@android:color/background_dark"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ac_romote"
+        app:layout_constraintStart_toStartOf="@+id/hdmi_cb"
+        app:layout_constraintTop_toTopOf="@+id/ac_romote"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <CheckBox
+        android:id="@+id/hdmi_cb"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+
+        android:buttonTint="@android:color/background_dark"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="@+id/hdmi"
+        app:layout_constraintStart_toStartOf="@+id/laser_pen_cb"
+        app:layout_constraintTop_toTopOf="@+id/hdmi"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <Button
+        android:id="@+id/br_btn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="32dp"
+        android:text="Hoàn trả thiết bị"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="360dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/edit_text"
+        app:layout_constraintBottom_toTopOf="@+id/br_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/note"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="24dp"
+        android:background="@android:color/transparent"
+        android:gravity="left"
+        android:hint="Ghi chú..."
+        android:textColor="@color/black"
+        android:textColorHint="@color/common_google_signin_btn_text_light"
+        android:textSize="15dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/br_btn"
+        app:layout_constraintEnd_toEndOf="@+id/br_btn"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="@+id/br_btn" />
+
+    <TextView
+        android:id="@+id/notify"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:text=""
+        android:textColor="#7C0000"
+        android:textSize="17dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/pre_text"
+        app:layout_constraintTop_toTopOf="@+id/pre_text" />
+
+    <TextView
+        android:id="@+id/pre_text"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="248dp"
+        android:layout_marginBottom="48dp"
+        android:gravity="center_horizontal"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/warning"
+        android:layout_width="315dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="108dp"
+        android:gravity="fill_horizontal"
+        android:text="Hiện tại bạn không có tiết dạy nào, vui lòng thông báo cho quản lý biết lý do bạn mượn đồ nhé!"
+        android:textColor="#7C0000"
+        android:textSize="14dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/icon" />
+
+    <CheckBox
+        android:id="@+id/instead"
+        android:layout_width="105dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="36dp"
+        android:background="@drawable/button_bgr"
+        android:buttonTint="@color/white"
+        android:text="Dạy thay"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/cover" />
+
+    <CheckBox
+        android:id="@+id/cover"
+        android:layout_width="105dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/button_border"
+        android:buttonTint="#C4AA0F0F"
+        android:text="Dạy bù"
+        android:textColor="#C4AA0F0F"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/warning" />
+
+    <TextView
+        android:id="@+id/borrow_time"
+        android:layout_width="360dp"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/notify"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/pre_text"
+        app:layout_constraintTop_toBottomOf="@+id/notify" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="@+id/pre_text"
+        app:layout_constraintTop_toTopOf="@+id/warning"
+        android:background="@drawable/warning" />
+
+    <ImageView
+        android:id="@+id/icon_"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="@+id/pre_text"
+        app:layout_constraintTop_toTopOf="@+id/warning"
+        android:background="@drawable/book" />
+
+    <EditText
+        android:id="@+id/room"
+        android:layout_width="105dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/room"
+        android:gravity="center"
+        android:hint="phòng..."
+        android:textCursorDrawable="?android:attr/fastScrollThumbDrawable"
+        android:inputType="number"
+        android:textColor="@color/cardview_dark_background"
+        android:textColorHint="#C8C6C6"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/instead"
+        app:layout_constraintTop_toBottomOf="@+id/instead" />
+
+    <TextView
+        android:id="@+id/teacher"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:background="@drawable/teacher"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/room"
+        app:layout_constraintTop_toTopOf="@+id/room" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
