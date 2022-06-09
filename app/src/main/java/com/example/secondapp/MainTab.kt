@@ -88,6 +88,9 @@ class MainTab : AppCompatActivity() {
                     val hdmi_wire:String = intent.getStringExtra(SelectEquipment.HDMI_WIRE).toString()
                     val laser_pen:String = intent.getStringExtra(SelectEquipment.LASER_PEN).toString()
                     val mcr_phone:String = intent.getStringExtra(SelectEquipment.MCR_PHONE).toString()
+                    val period_:String = intent.getStringExtra(SelectEquipment.PERIOD_TM).toString()
+                    val teachroom:String = intent.getStringExtra(SelectEquipment.TEACHROOM).toString()
+                    val subject_:String = intent.getStringExtra(SelectEquipment._SUBJECT_).toString()
 
                     if (last_state == "Borrowed") {
 
@@ -100,6 +103,9 @@ class MainTab : AppCompatActivity() {
                         items["return_tm"] = return_time
                         items["borrow_nt"] = borrow_note
                         items["return_nt"] = return_note
+                        items["period_tm"] = period_
+                        items["teachroom"] = teachroom
+                        items["_subject_"] = subject_
 
                         val items_last = HashMap<String, Any>()
                         items_last["Bits_AHLM"] = bits_taked

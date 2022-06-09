@@ -27,8 +27,35 @@
         <entry key="..\:/Users/Dell Precision/AndroidStudioProjects/SecondApp/app/src/main/res/layout/fragment_q_rscan.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Dell Precision/AndroidStudioProjects/SecondApp/app/src/main/res/layout/mytextstyle.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Dell Precision/AndroidStudioProjects/SecondApp/app/src/main/res/menu/menu_interface.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.362" />
+        <entry key="app/src/main/res/drawable/border.xml" value="0.361" />
+        <entry key="app/src/main/res/drawable/button_bgr.xml" value="0.362" />
+        <entry key="app/src/main/res/drawable/button_border.xml" value="0.362" />
+        <entry key="app/src/main/res/drawable/cal.xml" value="0.361" />
+        <entry key="app/src/main/res/drawable/frame.xml" value="0.361" />
+        <entry key="app/src/main/res/drawable/gradient.xml" value="0.361" />
+        <entry key="app/src/main/res/drawable/ic_arrow.xml" value="0.362" />
+        <entry key="app/src/main/res/drawable/ic_baseline_qr_code_24.xml" value="0.362" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.362" />
+        <entry key="app/src/main/res/drawable/line.xml" value="0.339" />
+        <entry key="app/src/main/res/drawable/qrr.xml" value="0.362" />
+        <entry key="app/src/main/res/drawable/room.xml" value="0.362" />
+        <entry key="app/src/main/res/drawable/teacher.xml" value="0.362" />
+        <entry key="app/src/main/res/drawable/top_border.xml" value="0.361" />
+        <entry key="app/src/main/res/layout-w936dp/custom_border.xml" value="0.270703125" />
+        <entry key="app/src/main/res/layout-w936dp/custom_title.xml" value="0.270703125" />
+        <entry key="app/src/main/res/layout/aab.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_interface.xml" value="0.3609375" />
-        <entry key="app/src/main/res/layout/activity_qror_his.xml" value="0.2028985507246377" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/activity_main_tab.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/activity_qror_his.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/activity_select_equipment.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/custom_layout.xml" value="0.35144927536231885" />
+        <entry key="app/src/main/res/layout/custom_title.xml" value="0.35989583333333336" />
+        <entry key="app/src/main/res/layout/insert_his.xml" value="0.33" />
       </map>
     </option>
   </component>

@@ -39,13 +39,35 @@ class SelectEquipment : AppCompatActivity() {
         val MCR_PHONE:String = "com.example.application.example.MCR_PHONE"
         val BORROWNOTE:String = "com.example.application.example.BORROWNOTE"
         val RETURNNOTE:String = "com.example.application.example.RETURNNOTE"
+        val _SUBJECT_:String = "com.example.application.example._SUBJECT_"
+        val TEACHROOM:String = "com.example.application.example.TEACHROOM"
+        val PERIOD_TM:String = "com.example.application.example.PERIOD_TM"
 
     }
 
-    @SuppressLint("NewApi", "SetTextI18n")
+    @SuppressLint("NewApi", "SetTextI18n", "WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_equipment)
+
+        var period: Array<Array<String>> = arrayOf(
+            arrayOf("00-00", "06-45"),
+            arrayOf("06-45", "07-30"),
+            arrayOf("07-30", "08-15"),
+            arrayOf("08-25", "09-10"),
+            arrayOf("09-20", "10-15"),
+            arrayOf("10-15", "11-00"),
+            arrayOf("11-00", "11-45"),
+            arrayOf("12-30", "13-15"),
+            arrayOf("13-15", "14-00"),
+            arrayOf("14-10", "14-55"),
+            arrayOf("15-05", "15-50"),
+            arrayOf("16-00", "16-45"),
+            arrayOf("16-45", "17-30"),
+            arrayOf("17-45", "18-30"),
+            arrayOf("18-30", "19-15")
+        )
 
         val intent_:Intent = getIntent()
         val mail:String = intent_.getStringExtra(Login.EMAIL_NAME).toString()
@@ -60,34 +82,12 @@ class SelectEquipment : AppCompatActivity() {
         val laser_pen_cb = findViewById<CheckBox>(R.id.laser_pen_cb)
         val micro_cb = findViewById<CheckBox>(R.id.micro_cb)
 
-        val exit__ = findViewById<Button>(R.id.exit__)
+        val exit__ = findViewById<ImageButton>(R.id.exit__)
         val pre_text = findViewById<TextView>(R.id.pre_text)
         val notify = findViewById<TextView>(R.id.notify)
-        val note = findViewById<EditText>(R.id.note)
         val br_btn = findViewById<Button>(R.id.br_btn)
 
         val borrow_time = findViewById<TextView>(R.id.borrow_time)
-
-        val warning = findViewById<TextView>(R.id.warning)
-        val cover = findViewById<CheckBox>(R.id.cover)
-        val instead = findViewById<CheckBox>(R.id.instead)
-        val room = findViewById<EditText>(R.id.room)
-        val teacher = findViewById<TextView>(R.id.teacher)
-
-        val icon = findViewById<ImageView>(R.id.icon)
-        val icon_ = findViewById<ImageView>(R.id.icon_)
-
-        room.visibility = View.INVISIBLE
-        teacher.visibility = View.INVISIBLE
-
-        icon_.visibility = View.INVISIBLE
-        icon.visibility = View.INVISIBLE
-        warning.visibility = View.INVISIBLE
-        cover.visibility = View.INVISIBLE
-        instead.visibility = View.INVISIBLE
-
-        instead.isEnabled = false
-        cover.isEnabled = false
 
         pre_text.visibility = View.INVISIBLE
         notify.visibility = View.INVISIBLE
@@ -95,7 +95,7 @@ class SelectEquipment : AppCompatActivity() {
         borrow_time.visibility = View.INVISIBLE
 
         exit__.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, Interface::class.java)
+            val intent = Intent(this, QRorHis::class.java)
             intent.putExtra(Login.EMAIL_NAME, mail)
             startActivity(intent)
         })
@@ -138,7 +138,7 @@ class SelectEquipment : AppCompatActivity() {
                                     laser_pen_cb.isEnabled = false
                                     micro_cb.isEnabled = false
 
-                                    var time = it["LastCheck"].toString().split("-")
+                                    val time = it["LastCheck"].toString().split("-")
                                     val br_time = "${time[2]}/${time[1]}/${time[0]} lúc ${time[3]}h:${time[4]}"
 
                                     borrow_time.text = "Bạn đã mượn vào ngày $br_time"
@@ -148,90 +148,7 @@ class SelectEquipment : AppCompatActivity() {
                             }
                             br_btn.text = "Hoàn trả thiết bị"
                         } else {
-                            val c:Calendar = Calendar.getInstance()
-                            val time :String
-                            if (c.get(Calendar.MINUTE) < 45){
-                                time = "${timeForm(c.get(Calendar.HOUR_OF_DAY))}-${timeForm(c.get(Calendar.MINUTE))}"}
-                            else {
-                                time = "${timeForm(c.get(Calendar.HOUR_OF_DAY) + 1)}-${timeForm(c.get(Calendar.MINUTE) + 15 - 60)}"
-                            }
-                            val numtoStr = mapOf("1" to "Sunday", "2" to "Monday", "3" to "Tuesday",
-                                "4" to "Wednesday", "5" to "Thurday", "6" to "Friday", "7" to "Saturday")
 
-                            FStore.collection("RFID")
-                                .whereEqualTo("email", transformEmail(mail)).get()
-                                .addOnSuccessListener { documents ->
-                                    for (document in documents){
-                                        val rightNow = Calendar.getInstance()
-                                        val date = rightNow.get(Calendar.DAY_OF_WEEK).toString()
-                                        FStore.collection("RFID")
-                                            .document(document.id)
-                                            .collection("Teaching")
-                                            .document("schedule")
-                                            .collection(numtoStr[date].toString())
-                                            .whereLessThan("start", time)
-                                            .get().addOnSuccessListener {   documents ->
-                                                var check = 0
-                                                for (document in documents){
-                                                    if (document.data["end"].toString() > time){
-                                                        check = 1
-                                                        warning.visibility = View.VISIBLE
-                                                        icon_.visibility = View.VISIBLE
-                                                        warning.text = "     Hiện tại bạn có tiết dạy ở phòng ${document["room"]}, từ ${document["start"]}\n     đến ${document["end"]}. Chúc bạn có một buổi học vui vẻ!"
-                                                    }
-                                                }
-                                                if (check == 0){
-                                                    icon.visibility = View.VISIBLE
-                                                    warning.visibility = View.VISIBLE
-                                                    cover.visibility = View.VISIBLE
-                                                    instead.visibility = View.VISIBLE
-
-                                                    warning.text = "Hiện tại bạn không có tiết dạy nào, vui lòng thông báo cho quản lý biết lý do bạn mượn đồ nhé!"
-
-                                                    instead.isEnabled = true
-                                                    cover.isEnabled = true
-
-                                                    instead.setOnClickListener{
-                                                        if (instead.isChecked){
-                                                            room.visibility = View.VISIBLE
-                                                            teacher.visibility = View.VISIBLE
-                                                            room.doAfterTextChanged {
-                                                                var ch_ = 0
-                                                                var teacher_name = ""
-                                                                FStore.collection("RFID")
-                                                                    .get().addOnSuccessListener { dts ->
-                                                                        for (dt in dts){
-                                                                            FStore.collection("RFID").document(dt.id)
-                                                                                .collection("Teaching")
-                                                                                .document("schedule")
-                                                                                .collection(numtoStr[date].toString())
-                                                                                .whereLessThan("start", time)
-                                                                                .get().addOnSuccessListener{  Documents ->
-                                                                                    for (Document in Documents){
-                                                                                        if (document.data["end"].toString() > time){
-                                                                                            if (Document["room"] == room.text.toString()){
-                                                                                                teacher_name = teacher_name.plus(dt["name"])
-                                                                                                teacher.text = "  g/v: ${teacher_name}  "
-                                                                                                ch_ = 1
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                        }
-                                                                    }
-                                                                if (ch_ == 0) teacher.text = ""
-                                                            }
-                                                            ////////////////////////////
-                                                        }else{
-                                                            room.visibility = View.INVISIBLE
-                                                            teacher.visibility = View.INVISIBLE
-                                                            ////////////////////////////
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                    }
-                                }
                             br_btn.text = "Mượn thiết bị"
                         }
                     Log.e("", lastState)
@@ -268,11 +185,6 @@ class SelectEquipment : AppCompatActivity() {
 
         val intent_:Intent = intent
         val mail:String = intent_.getStringExtra(Login.EMAIL_NAME).toString()
-        val note = findViewById<EditText>(R.id.note)
-
-        val room = findViewById<EditText>(R.id.room)
-        val teacher = findViewById<TextView>(R.id.teacher)
-
 //        val now = LocalDateTime.now()
 //        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm")
 //        val time: String = now.format(formatter)
@@ -287,7 +199,6 @@ class SelectEquipment : AppCompatActivity() {
 
         val intent = Intent(this, MainTab::class.java)
         intent.putExtra(RETURNTIME, time)
-        intent.putExtra(RETURNNOTE, if (note.text.toString() == ""){"_"}else{note.text.toString()})
         intent.putExtra(LAST_STATE, "Returned")
         intent.putExtra(Login.EMAIL_NAME, mail)
         startActivity(intent)
@@ -306,14 +217,6 @@ class SelectEquipment : AppCompatActivity() {
         val micro_cb = findViewById<CheckBox>(R.id.micro_cb)
 
         val pre_text = findViewById<TextView>(R.id.pre_text)
-        val note = findViewById<EditText>(R.id.note)
-
-        val warning = findViewById<TextView>(R.id.warning)
-        val cover = findViewById<CheckBox>(R.id.cover)
-        val instead = findViewById<CheckBox>(R.id.instead)
-
-        val room = findViewById<EditText>(R.id.room)
-        val teacher = findViewById<TextView>(R.id.teacher)
 
         pre_text.text=""
 
@@ -363,12 +266,6 @@ class SelectEquipment : AppCompatActivity() {
             Toast.makeText(applicationContext, "Bạn chưa chọn thiết bị nào!", Toast.LENGTH_SHORT)
                 .show()
             ////////////////////////////
-        }else if (room.text.toString() == "" && instead.isChecked){
-            Toast.makeText(applicationContext, "Bạn chưa nhập phòng dạy thay!", Toast.LENGTH_SHORT)
-                .show()
-        }else if (room.text.toString() != "" && teacher.text == ""){
-            Toast.makeText(applicationContext, "Phòng ${room.text} hiện tại trống tiết!", Toast.LENGTH_SHORT)
-                .show()
         }else {
 //            val now = LocalDateTime.now()
 //            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm")
@@ -381,22 +278,19 @@ class SelectEquipment : AppCompatActivity() {
             Toast.makeText(
                 applicationContext, "Xác nhận mượn thiết bị! $time", Toast.LENGTH_SHORT).show()
 
-            var noteText :String = ""
-            if(instead.isChecked){
-                noteText = noteText.plus("Giảng viên dạy thay${" ${teacher.text},"} phòng ${room.text}")
-                ////////////////////////////
-            }
-            if(cover.isChecked){
-                noteText = noteText.plus("Giảng viên dạy bù. ")
-            }
-            noteText = noteText.plus(note.text)
-
             val intent = Intent(this, MainTab::class.java)
+
             intent.putExtra(BORROWTIME, time)
             intent.putExtra(RETURNTIME, "_")
-            intent.putExtra(BORROWNOTE, if (noteText == ""){"_"}else{noteText})
-            intent.putExtra(RETURNNOTE, "_")
-            intent.putExtra(LAST_CHECK, time)
+
+            var period_ = ""
+            var teachroom = ""
+            var subject_ = ""
+            intent.putExtra(_SUBJECT_, "")
+            intent.putExtra(TEACHROOM, "")
+            intent.putExtra(PERIOD_TM, "")
+            intent.putExtra(BORROWTIME, time)
+
             intent.putExtra(BITS_TAKED, bitsTaked)
             intent.putExtra(LAST_STATE, "Borrowed")
             intent.putExtra(AC_REMOTE, ac_text)
@@ -428,4 +322,3 @@ class SelectEquipment : AppCompatActivity() {
     }
 
 }
-
