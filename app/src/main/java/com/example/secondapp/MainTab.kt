@@ -42,7 +42,7 @@ class MainTab : AppCompatActivity() {
 
         val exit2 = findViewById<Button>(R.id.exit2)
         exit2.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, QRorHis::class.java)
+            val intent = Intent(this, SelectEquipment::class.java)
             intent.putExtra(Login.EMAIL_NAME, mail)
             startActivity(intent)
             })
@@ -71,26 +71,40 @@ class MainTab : AppCompatActivity() {
         codeScanner.isFlashEnabled = false
 
         codeScanner.decodeCallback = DecodeCallback {
-            runOnUiThread{
-                if(it.text == "Hello Noer!") {
-                    val intent_ = Intent(this, SelectEquipment::class.java)
+            runOnUiThread {
+                if (it.text == "Hello Noer!") {
+                    val intent_ = Intent(this, QRorHis::class.java)
 
                     val intent: Intent = getIntent()
                     val mail: String = intent.getStringExtra(Login.EMAIL_NAME).toString()
-                    val borrow_time:String = intent.getStringExtra(SelectEquipment.BORROWTIME).toString()
-                    val return_time:String = intent.getStringExtra(SelectEquipment.RETURNTIME).toString()
-                    val borrow_note:String = intent.getStringExtra(SelectEquipment.BORROWNOTE).toString()
-                    val return_note:String = intent.getStringExtra(SelectEquipment.RETURNNOTE).toString()
-                    val last_check:String = intent.getStringExtra(SelectEquipment.LAST_CHECK).toString()
-                    val bits_taked:String = intent.getStringExtra(SelectEquipment.BITS_TAKED).toString()
-                    val last_state:String = intent.getStringExtra(SelectEquipment.LAST_STATE).toString()
-                    val ac_remote:String = intent.getStringExtra(SelectEquipment.AC_REMOTE).toString()
-                    val hdmi_wire:String = intent.getStringExtra(SelectEquipment.HDMI_WIRE).toString()
-                    val laser_pen:String = intent.getStringExtra(SelectEquipment.LASER_PEN).toString()
-                    val mcr_phone:String = intent.getStringExtra(SelectEquipment.MCR_PHONE).toString()
-                    val period_:String = intent.getStringExtra(SelectEquipment.PERIOD_TM).toString()
-                    val teachroom:String = intent.getStringExtra(SelectEquipment.TEACHROOM).toString()
-                    val subject_:String = intent.getStringExtra(SelectEquipment._SUBJECT_).toString()
+
+                    val Subject: String =
+                        intent.getStringExtra(SelectEquipment._SUBJECT_).toString()
+                    val Room: String = intent.getStringExtra(SelectEquipment.LAST_ROOM).toString()
+                    val last_check: String =
+                        intent.getStringExtra(SelectEquipment.LAST_CHECK).toString()
+                    val bits_taked: String =
+                        intent.getStringExtra(SelectEquipment.BITS_TAKED).toString()
+                    val last_state: String =
+                        intent.getStringExtra(SelectEquipment.LAST_STATE).toString()
+
+                    val ac_remote: String =
+                        intent.getStringExtra(SelectEquipment.AC_REMOTE).toString()
+                    val hdmi_wire: String =
+                        intent.getStringExtra(SelectEquipment.HDMI_WIRE).toString()
+                    val laser_pen: String =
+                        intent.getStringExtra(SelectEquipment.LASER_PEN).toString()
+                    val mcr_phone: String =
+                        intent.getStringExtra(SelectEquipment.MCR_PHONE).toString()
+                    val period_: String =
+                        intent.getStringExtra(SelectEquipment.PERIOD_TM).toString()
+                    val teachroom: String =
+                        intent.getStringExtra(SelectEquipment.TEACHROOM).toString()
+                    val borrow_time: String =
+                        intent.getStringExtra(SelectEquipment.BORROW_TM).toString()
+                    val return_time: String =
+                        intent.getStringExtra(SelectEquipment.RETURN_TM).toString()
+
 
                     if (last_state == "Borrowed") {
 
@@ -101,44 +115,50 @@ class MainTab : AppCompatActivity() {
                         items["mcr_phone"] = mcr_phone
                         items["borrow_tm"] = borrow_time
                         items["return_tm"] = return_time
-                        items["borrow_nt"] = borrow_note
-                        items["return_nt"] = return_note
-                        items["period_tm"] = period_
                         items["teachroom"] = teachroom
-                        items["_subject_"] = subject_
+                        items["_subject_"] = Subject
+                        items["period_tm"] = period_
 
                         val items_last = HashMap<String, Any>()
                         items_last["Bits_AHLM"] = bits_taked
-                        items_last["LastState"] = "Borrowed"
+                        items_last["LastState"] = last_state
                         items_last["LastCheck"] = last_check
+                        items_last["Last_Room"] = Room
 
-                        FStore.collection("History").document(transformEmail(mail)).collection("EquipmentState").
-                            document(borrow_time).set(items)
-                        FStore.collection("History").document(transformEmail(mail)).collection("EquipmentState").
-                                document("Last").set(items_last)
-                    }else{
                         FStore.collection("History").document(transformEmail(mail))
-                              .collection("EquipmentState")
-                              .document("Last").get().addOnSuccessListener {
+                            .collection("EquipmentState").document(borrow_time).set(items)
+                        FStore.collection("History").document(transformEmail(mail))
+                            .collection("EquipmentState").document("Last").set(items_last)
+                        Toast.makeText(this, "Quét mã thành công! $mail", Toast.LENGTH_SHORT).show()
+                        intent_.putExtra(Login.EMAIL_NAME, mail)
+                        Thread.sleep(500)
+                        startActivity(intent_)
+                    } else {
+                        FStore.collection("History").document(transformEmail(mail))
+                            .collection("EquipmentState")
+                            .document("Last").get().addOnSuccessListener {
                                 val items = HashMap<String, Any>()
                                 items["return_tm"] = return_time
-                                items["return_nt"] = return_note
 
                                 val items_last = HashMap<String, Any>()
                                 items_last["LastState"] = "Returned"
+                                items_last["LastCheck"] = "_"
+                                items_last["Last_Room"] = "_"
+                                items_last["Bits_AHLM"] = "_"
 
-                                FStore.collection("History").document(transformEmail(mail)).collection("EquipmentState").
-                                document(it["LastCheck"].toString()).update(items)
-                                FStore.collection("History").document(transformEmail(mail)).collection("EquipmentState").
-                                document("Last").update(items_last)
+                                FStore.collection("History").document(transformEmail(mail))
+                                    .collection("EquipmentState")
+                                    .document(it["LastCheck"].toString()).update(items)
+                                FStore.collection("History").document(transformEmail(mail))
+                                    .collection("EquipmentState").document("Last")
+                                    .update(items_last)
                             }
+                        Toast.makeText(this, "Quét mã thành công! $mail", Toast.LENGTH_SHORT).show()
+                        intent_.putExtra(Login.EMAIL_NAME, mail)
+                        Thread.sleep(500)
+                        startActivity(intent_)
                     }
-
-                    Toast.makeText(this, "Quét mã thành công! $mail", Toast.LENGTH_SHORT).show()
-                    intent_.putExtra(Login.EMAIL_NAME, mail)
-                    Thread.sleep(500)
-                    startActivity(intent_)
-                }else{Toast.makeText(this, "Quét mã không thành công!", Toast.LENGTH_SHORT).show()}
+                }
             }
         }
         codeScanner.errorCallback = ErrorCallback {

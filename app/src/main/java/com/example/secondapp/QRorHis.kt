@@ -62,7 +62,7 @@ class QRorHis : AppCompatActivity() {
                 val number_of_data_to_show:Int = 10 //--------------------------------------------//
                 for (document in documents) {
                     count_ += 1
-                    if (count_ >= count - 1 - number_of_data_to_show && count_ < count) {
+                    if (count_ >= count - number_of_data_to_show && count_ < count) {
                         Log.e("var ", document.data["return_tm"].toString())
 //                        his.append(transformNotify(document))
 //                        his.append("\n\n")
@@ -89,10 +89,10 @@ class QRorHis : AppCompatActivity() {
                         }
                         borrow_tm.text = reformBrtime
 
-                        ac.isChecked = document.data["ac_remote"] == "Borrowed"
-                        hdmi.isChecked = document.data["hdmi_wire"] == "Borrowed"
-                        laser.isChecked = document.data["laser_pen"] == "Borrowed"
-                        mic.isChecked = document.data["mcr_phone"] == "Borrowed"
+                        ac.isChecked = document.data["ac_remote"] != "_"
+                        hdmi.isChecked = document.data["hdmi_wire"] != "_"
+                        laser.isChecked = document.data["laser_pen"] != "_"
+                        mic.isChecked = document.data["mcr_phone"] != "_"
 
                         (view.parent as? ViewGroup)?.removeView(view)
                         Linear.addView(view)

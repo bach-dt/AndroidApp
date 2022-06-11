@@ -15,14 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SecondApp">
         <activity
+            android:name=".BrokenQR"
+            android:exported="false" />
+        <activity
+            android:name=".Broken"
+            android:exported="false" />
+        <activity
+            android:name=".ScanDevice"
+            android:exported="false" />
+        <activity
             android:name=".QRorHis"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SelectEquipment"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Interface"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Login"
             android:exported="false" />

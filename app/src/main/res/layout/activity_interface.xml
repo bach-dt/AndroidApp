@@ -45,7 +45,7 @@
         android:background="@android:color/transparent"
         android:orientation="vertical"
         android:scrollbars="none"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

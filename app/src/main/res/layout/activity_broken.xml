@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectEquipment">
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layout_"
+            layout="@layout/custom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout" />
+
+    <TextView
+        android:id="@+id/Select_equip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn thiết bị"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038" />
+
+    <ImageButton
+        android:id="@+id/exit__"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:rotation="180"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/arrow_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ac_romote"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/hdmi"
+        app:layout_constraintTop_toBottomOf="@id/textView34" />
+
+    <ImageButton
+        android:id="@+id/hdmi"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/laser_pen"
+        app:layout_constraintTop_toBottomOf="@+id/ac_romote" />
+
+    <ImageButton
+        android:id="@+id/laser_pen"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/micro"
+        app:layout_constraintTop_toBottomOf="@+id/hdmi" />
+
+    <CheckBox
+        android:id="@+id/laser_pen_cb"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:buttonTint="@android:color/background_dark"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toBottomOf="@+id/laser_pen"
+        app:layout_constraintStart_toStartOf="@+id/micro_cb"
+        app:layout_constraintTop_toTopOf="@+id/laser_pen"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <ImageButton
+        android:id="@+id/micro"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/laser_pen"
+        tools:layout_editor_absoluteX="46dp" />
+
+    <CheckBox
+        android:id="@+id/micro_cb"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:buttonTint="@android:color/background_dark"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toBottomOf="@+id/micro"
+        app:layout_constraintEnd_toEndOf="@+id/micro"
+        app:layout_constraintTop_toTopOf="@+id/micro"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/remote_room"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text=""
+        android:textSize="18dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#487DCD"
+        app:layout_constraintEnd_toStartOf="@+id/ac_romote_cb"
+        app:layout_constraintTop_toTopOf="@+id/ac_romote"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/hdmi_room"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text=""
+        android:textSize="18dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#487DCD"
+        app:layout_constraintEnd_toStartOf="@+id/hdmi_cb"
+        app:layout_constraintTop_toTopOf="@+id/hdmi"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/laser_room"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text=""
+        android:textSize="18dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#487DCD"
+        app:layout_constraintEnd_toEndOf="@+id/hdmi_room"
+        app:layout_constraintTop_toTopOf="@+id/laser_pen" />
+
+    <TextView
+        android:id="@+id/micro_room"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
+        android:text=""
+        android:textSize="18dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#487DCD"
+        app:layout_constraintEnd_toStartOf="@+id/ac_romote_cb"
+        app:layout_constraintTop_toTopOf="@+id/micro" />
+
+    <CheckBox
+        android:id="@+id/ac_romote_cb"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:buttonTint="@android:color/background_dark"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toBottomOf="@+id/ac_romote"
+        app:layout_constraintStart_toStartOf="@+id/hdmi_cb"
+        app:layout_constraintTop_toTopOf="@+id/ac_romote"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <CheckBox
+        android:id="@+id/hdmi_cb"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:buttonTint="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/hdmi"
+        app:layout_constraintStart_toStartOf="@+id/laser_pen_cb"
+        app:layout_constraintTop_toTopOf="@+id/hdmi"
+        app:layout_constraintVertical_bias="0.466" />
+
+
+    <Button
+        android:id="@+id/scan_device"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:text="Quét thiết bị"
+        android:textColor="@color/white"
+        android:layout_marginEnd="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/broken"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/broken"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:text="BÁO HỎNG"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/micro" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/remote"
+        app:layout_constraintBottom_toBottomOf="@+id/ac_romote"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ac_romote" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/hdmi"
+        app:layout_constraintBottom_toBottomOf="@+id/hdmi"
+        app:layout_constraintStart_toStartOf="@+id/ac_romote"
+        app:layout_constraintTop_toTopOf="@+id/hdmi" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/laser"
+        app:layout_constraintBottom_toBottomOf="@+id/laser_pen"
+        app:layout_constraintStart_toStartOf="@+id/ac_romote"
+        app:layout_constraintTop_toTopOf="@+id/laser_pen" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/micro"
+        app:layout_constraintBottom_toBottomOf="@+id/micro"
+        app:layout_constraintStart_toStartOf="@+id/ac_romote"
+        app:layout_constraintTop_toTopOf="@+id/micro" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="25dp"
+        android:gravity="center_vertical"
+        android:text="Điều khiển"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/ac_romote" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="25dp"
+        android:gravity="center_vertical"
+        android:text="Cáp HDMI"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/hdmi"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/hdmi" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="25dp"
+        android:gravity="center_vertical"
+        android:text="Bút Laser"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/laser_pen"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/laser_pen" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="25dp"
+        android:gravity="center_vertical"
+        android:text="Micro"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/micro"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/laser_pen" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
