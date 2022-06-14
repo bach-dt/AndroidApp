@@ -1,13 +1,11 @@
 package com.example.secondapp
 
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.AuthResult
@@ -74,7 +72,7 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         })
 
-        val exit_ = findViewById<Button>(R.id.exit_)
+        val exit_ = findViewById<ImageButton>(R.id.exit_)
         exit_.setOnClickListener(View.OnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

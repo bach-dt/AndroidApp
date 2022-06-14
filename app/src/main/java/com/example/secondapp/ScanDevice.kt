@@ -5,10 +5,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -38,19 +35,133 @@ class ScanDevice : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_tab)
+        setContentView(R.layout.activity_scan_device)
 
         val intent_:Intent = intent
         val mail:String = intent_.getStringExtra(Login.EMAIL_NAME).toString()
 
+        val intent = intent
+        var ac_remote = intent.getStringExtra(SelectEquipment.AC_REMOTE)
+        var hdmi_wire = intent.getStringExtra(SelectEquipment.HDMI_WIRE)
+        var laser_pen = intent.getStringExtra(SelectEquipment.LASER_PEN)
+        var mcr_phone = intent.getStringExtra(SelectEquipment.MCR_PHONE)
+
+        val ac_cb = findViewById<CheckBox>(R.id.ac_cb)
+        val hdmi_cb = findViewById<CheckBox>(R.id.hdmi_cb)
+        val laser_cb = findViewById<CheckBox>(R.id.laser_cb)
+        val micro_cb = findViewById<CheckBox>(R.id.micro_cb)
+        var deviceID = ""
+
+        if (ac_remote != null) {
+            if (ac_remote.length == 3){
+                ac_cb.isChecked = true
+            }
+        }
+        if (hdmi_wire != null) {
+            if (hdmi_wire.length == 3){
+                hdmi_cb.isChecked = true
+            }
+        }
+        if (laser_pen != null) {
+            if (laser_pen.length == 3){
+                laser_cb.isChecked = true
+            }
+        }
+        if (mcr_phone != null) {
+            if (mcr_phone.length == 3){
+                micro_cb.isChecked = true
+            }
+        }
+
         setupPermissions()
+        val scannerView: CodeScannerView = findViewById(R.id.scanner_view)
+        codeScanner = CodeScanner(this, scannerView)
+        codeScanner.camera = CodeScanner.CAMERA_BACK
+        codeScanner.formats = CodeScanner.ALL_FORMATS
+
+        codeScanner.autoFocusMode = AutoFocusMode.SAFE
+        codeScanner.scanMode = ScanMode.CONTINUOUS
+        codeScanner.isAutoFocusEnabled = true
+        codeScanner.isFlashEnabled = false
+
+        codeScanner.decodeCallback = DecodeCallback {
+            runOnUiThread {
+                if (it.text.length == 4) {
+                    val id = it.text
+
+                    deviceID = it.text.toString()
+                    if (id[3] == '1'){
+                        ac_remote = id.take(3)
+                        ac_cb.isChecked = true
+                    }
+                    if (id[3] == '2'){
+                        hdmi_wire = id.take(3)
+                        hdmi_cb.isChecked = true
+                    }
+                    if (id[3] == '3'){
+                        laser_pen = id.take(3)
+                        laser_cb.isChecked = true
+                    }
+                    if (id[3] == '4'){
+                        mcr_phone = id.take(3)
+                        micro_cb.isChecked = true
+                    }
+
+                } else {
+                    Toast.makeText(this, "Quét mã không thành công!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        codeScanner.errorCallback = ErrorCallback {
+            runOnUiThread {
+                Toast.makeText(this, "Camera error: ${it.message}", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+        ac_cb.setOnClickListener {
+            if (!ac_cb.isChecked){
+                ac_cb.isChecked = false
+                ac_remote = ""
+            }
+        }
+
+        hdmi_cb.setOnClickListener {
+            if (!hdmi_cb.isChecked){
+                hdmi_cb.isChecked = false
+                hdmi_wire = ""
+            }
+        }
+
+        laser_cb.setOnClickListener {
+            if (!laser_cb.isChecked){
+                laser_cb.isChecked = false
+                laser_pen = ""
+            }
+        }
+
+        micro_cb.setOnClickListener {
+            if (!micro_cb.isChecked){
+                micro_cb.isChecked = false
+                mcr_phone = ""
+            }
+        }
+
+        scannerView.setOnClickListener {
+            codeScanner.startPreview()
+        }
         startScanning()
 
         val exit2 = findViewById<Button>(R.id.exit2)
         exit2.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, SelectEquipment::class.java)
-            intent.putExtra(Login.EMAIL_NAME, mail)
-            startActivity(intent)
+            val intent_ = Intent(this, SelectEquipment::class.java)
+            intent_.putExtra(Login.EMAIL_NAME, mail)
+            intent_.putExtra(AC_REMOTE_ID, ac_remote)
+            intent_.putExtra(HDMI_WIRE_ID, hdmi_wire)
+            intent_.putExtra(LASER_PEN_ID, laser_pen)
+            intent_.putExtra(MCR_PHONE_ID, mcr_phone)
+            intent_.putExtra(DEVICE_ID, deviceID)
+            startActivity(intent_)
         })
 
 
@@ -68,54 +179,7 @@ class ScanDevice : AppCompatActivity() {
     }
 
     private fun startScanning() {
-        val scannerView: CodeScannerView = findViewById(R.id.scanner_view)
-        codeScanner = CodeScanner(this, scannerView)
-        codeScanner.camera = CodeScanner.CAMERA_BACK
-        codeScanner.formats = CodeScanner.ALL_FORMATS
 
-        codeScanner.autoFocusMode = AutoFocusMode.SAFE
-        codeScanner.scanMode = ScanMode.CONTINUOUS
-        codeScanner.isAutoFocusEnabled = true
-        codeScanner.isFlashEnabled = false
-
-        codeScanner.decodeCallback = DecodeCallback {
-            runOnUiThread {
-                Toast.makeText(this, it.text, Toast.LENGTH_SHORT).show()
-                if (it.text.length == 4) {
-
-                    val intent_ = Intent(this, SelectEquipment::class.java)
-                    val intent = intent
-                    val mail  = intent.getStringExtra(Login.EMAIL_NAME)
-                    val ac_remote = intent.getStringExtra(SelectEquipment.AC_REMOTE)
-                    val hdmi_wire = intent.getStringExtra(SelectEquipment.HDMI_WIRE)
-                    val laser_pen = intent.getStringExtra(SelectEquipment.LASER_PEN)
-                    val mcr_phone = intent.getStringExtra(SelectEquipment.MCR_PHONE)
-
-                    val deviceID = it.text.toString()
-
-                    intent_.putExtra(Login.EMAIL_NAME, mail)
-                    intent_.putExtra(DEVICE_ID, deviceID)
-                    intent_.putExtra(AC_REMOTE_ID, ac_remote)
-                    intent_.putExtra(HDMI_WIRE_ID, hdmi_wire)
-                    intent_.putExtra(LASER_PEN_ID, laser_pen)
-                    intent_.putExtra(MCR_PHONE_ID, mcr_phone)
-                    startActivity(intent_)
-
-                } else {
-                    Toast.makeText(this, "Quét mã không thành công!", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-        codeScanner.errorCallback = ErrorCallback {
-            runOnUiThread {
-                Toast.makeText(this, "Camera error: ${it.message}", Toast.LENGTH_SHORT).show()
-
-            }
-        }
-
-        scannerView.setOnClickListener {
-            codeScanner.startPreview()
-        }
     }
 
     private fun makeRequest() {

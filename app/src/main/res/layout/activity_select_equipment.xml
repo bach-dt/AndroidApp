@@ -142,51 +142,60 @@
     <TextView
         android:id="@+id/remote_room"
         android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:text=""
-        android:textSize="18dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="30dp"
+        android:background="#CFCFCF"
         android:gravity="center"
+        android:text=""
+        android:textColor="#5A5A5A"
+        android:textSize="18dp"
         android:textStyle="bold"
-        android:textColor="#487DCD"
+        app:layout_constraintBottom_toBottomOf="@+id/ac_romote"
         app:layout_constraintEnd_toStartOf="@+id/ac_romote_cb"
-        app:layout_constraintTop_toTopOf="@+id/ac_romote"
-        android:layout_marginEnd="20dp"/>
+        app:layout_constraintTop_toTopOf="@+id/ac_romote" />
 
     <TextView
         android:id="@+id/hdmi_room"
         android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:text=""
-        android:textSize="18dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="30dp"
+        android:background="#CFCFCF"
         android:gravity="center"
+        android:text=""
+        android:textColor="#5A5A5A"
+        android:textSize="18dp"
         android:textStyle="bold"
-        android:textColor="#487DCD"
+        app:layout_constraintBottom_toBottomOf="@+id/hdmi"
         app:layout_constraintEnd_toStartOf="@+id/hdmi_cb"
-        app:layout_constraintTop_toTopOf="@+id/hdmi"
-        android:layout_marginEnd="20dp"/>
+        app:layout_constraintTop_toTopOf="@+id/hdmi" />
 
     <TextView
         android:id="@+id/laser_room"
         android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:text=""
-        android:textSize="18dp"
+        android:layout_height="35dp"
+        android:background="#CFCFCF"
         android:gravity="center"
+        android:text=""
+        android:textColor="#5A5A5A"
+        android:textSize="18dp"
         android:textStyle="bold"
-        android:textColor="#487DCD"
-        app:layout_constraintEnd_toEndOf="@+id/hdmi_room"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/laser_pen"
+        app:layout_constraintEnd_toStartOf="@+id/laser_pen_cb"
         app:layout_constraintTop_toTopOf="@+id/laser_pen" />
 
     <TextView
         android:id="@+id/micro_room"
         android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="20dp"
-        android:text=""
-        android:textSize="18dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="30dp"
+        android:background="#CFCFCF"
         android:gravity="center"
+        android:text=""
+        android:textColor="#5A5A5A"
+        android:textSize="18dp"
         android:textStyle="bold"
-        android:textColor="#487DCD"
+        app:layout_constraintBottom_toBottomOf="@+id/micro"
         app:layout_constraintEnd_toStartOf="@+id/ac_romote_cb"
         app:layout_constraintTop_toTopOf="@+id/micro" />
 
@@ -200,7 +209,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/ac_romote"
         app:layout_constraintStart_toStartOf="@+id/hdmi_cb"
         app:layout_constraintTop_toTopOf="@+id/ac_romote"
-        app:layout_constraintVertical_bias="0.466" />
+        app:layout_constraintVertical_bias="0.5
+" />
 
     <CheckBox
         android:id="@+id/hdmi_cb"
@@ -214,16 +224,28 @@
         app:layout_constraintTop_toTopOf="@+id/hdmi"
         app:layout_constraintVertical_bias="0.466" />
 
+    <ImageView
+        android:id="@+id/view7"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:rotation="180"
+        android:src="@drawable/gradient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/micro" />
+
+
     <Button
         android:id="@+id/br_btn"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="32dp"
         android:text="Hoàn trả thiết bị"
+        android:layout_marginEnd="20dp"
         android:textColor="@color/white"
-        android:textSize="15dp"
+        android:background="@drawable/cal"
+        android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/scan_device"
         app:layout_constraintStart_toStartOf="@+id/view2"
         app:layout_constraintTop_toBottomOf="@+id/micro"
         app:layout_constraintVertical_bias="0.9" />
@@ -231,23 +253,25 @@
 
     <Button
         android:id="@+id/scan_device"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:text="Quét thiết bị"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/scanning"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/broken"
-        app:layout_constraintEnd_toEndOf="@+id/br_btn" />
+        app:layout_constraintBottom_toBottomOf="@+id/br_btn"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/br_btn" />
 
-    <Button
+    <ImageButton
         android:id="@+id/broken"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:text="BÁO HỎNG"
-        android:textColor="@color/white"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_baseline_no_cell_24"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/br_btn"
-        app:layout_constraintStart_toStartOf="@+id/br_btn" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="15dp"/>
 
     <ImageView
         android:id="@+id/imageView3"
@@ -397,6 +421,7 @@
         android:layout_marginTop="8dp"
         android:buttonTint="#646464"
         android:text="Điều khiển"
+        android:enabled="false"
         android:textColor="#464646"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/view2"
@@ -408,6 +433,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="216dp"
         android:text="Míc di động"
+        android:enabled="false"
         android:buttonTint="#646464"
         android:textColor="#464646"
         android:textStyle="bold"
@@ -420,6 +446,7 @@
         android:layout_height="30dp"
         android:buttonTint="#646464"
         android:text="Cáp HDMI"
+        android:enabled="false"
         android:textColor="#464646"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ac"
@@ -431,6 +458,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="216dp"
         android:text="Bút Laser"
+        android:enabled="false"
         android:buttonTint="#646464"
         android:textColor="#464646"
         android:textStyle="bold"
@@ -445,6 +473,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <ImageView
+        android:id="@+id/imageView7"
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@drawable/gradient"

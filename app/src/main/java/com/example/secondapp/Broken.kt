@@ -56,6 +56,11 @@ class Broken : AppCompatActivity() {
         val laser_pen_cb = findViewById<CheckBox>(R.id.laser_pen_cb)
         val micro_cb = findViewById<CheckBox>(R.id.micro_cb)
 
+        ac_remote_cb.isEnabled = false
+        hdmi_cb.isEnabled = false
+        laser_pen_cb.isEnabled = false
+        micro_cb.isEnabled = false
+
         val remote_room = findViewById<TextView>(R.id.remote_room)
         val hdmi_room = findViewById<TextView>(R.id.hdmi_room)
         val laser_room = findViewById<TextView>(R.id.laser_room)
@@ -83,18 +88,22 @@ class Broken : AppCompatActivity() {
         if (remoteID.length == 3){
             ac_remote_cb.isChecked = true
             remote_room.setText(remoteID)
+            ac_remote_cb.isEnabled = true
         }
         if (hdmiID.length == 3){
             hdmi_cb.isChecked = true
             hdmi_room.setText(hdmiID)
+            hdmi_cb.isEnabled = true
         }
         if (laserID.length == 3){
             laser_pen_cb.isChecked = true
             laser_room.setText(laserID)
+            laser_pen_cb.isEnabled = true
         }
         if (microID.length == 3){
             micro_cb.isChecked = true
             micro_room.setText(microID)
+            micro_cb.isEnabled = true
         }
 
         val broken = findViewById<Button>(R.id.broken)
@@ -175,12 +184,45 @@ class Broken : AppCompatActivity() {
                         .collection("broken").document(micro_room.text.toString())
                         .set(items)
                 }
+                Toast.makeText(applicationContext, "Báo hỏng thành công", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, SelectEquipment::class.java)
                 intent.putExtra(Login.EMAIL_NAME, mail)
                 startActivity(intent)
             }
+
         }
 
+        ac_remote_cb.setOnClickListener {
+            if (!ac_remote_cb.isChecked){
+                remote_room.text = ""
+                ac_remote_cb.isEnabled = false
+                remoteID = ""
+            }
+        }
+
+        hdmi_cb.setOnClickListener {
+            if (!hdmi_cb.isChecked){
+                hdmi_room.text = ""
+                hdmi_cb.isEnabled = false
+                hdmiID = ""
+            }
+        }
+
+        laser_pen_cb.setOnClickListener {
+            if (!laser_pen_cb.isChecked){
+                laser_room.text = ""
+                laser_pen_cb.isEnabled = false
+                laserID = ""
+            }
+        }
+
+        micro_cb.setOnClickListener {
+            if (!micro_cb.isChecked){
+                micro_room.text = ""
+                micro_cb.isEnabled = false
+                microID = ""
+            }
+        }
 
         val scan_device = findViewById<Button>(R.id.scan_device)
 

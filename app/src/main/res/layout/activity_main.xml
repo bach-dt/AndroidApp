@@ -7,21 +7,6 @@
     android:background="@drawable/bgr"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="311dp"
-        android:layout_height="55dp"
-        android:gravity="center_horizontal"
-        android:text="Đăng nhập với tài khoản email của Trường (Office365)"
-        android:textColor="@color/white"
-        android:textSize="19dp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912" />
-
     <Button
         android:id="@+id/login"
         android:layout_width="250dp"
@@ -70,7 +55,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to eHUST"
+        android:text="Welcome to iHUST"
         android:textColor="@color/white"
         android:textSize="30dp"
         android:textStyle="bold"

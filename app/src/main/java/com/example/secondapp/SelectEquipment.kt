@@ -2,6 +2,7 @@ package com.example.secondapp
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -79,7 +80,6 @@ class SelectEquipment : AppCompatActivity() {
         var hdmiID = intent_.getStringExtra(ScanDevice.HDMI_WIRE_ID).toString()
         var laserID = intent_.getStringExtra(ScanDevice.LASER_PEN_ID).toString()
         var microID = intent_.getStringExtra(ScanDevice.MCR_PHONE_ID).toString()
-        val deviceID = intent_.getStringExtra(ScanDevice.DEVICE_ID).toString()
 
         val ac_remote_cb = findViewById<CheckBox>(R.id.ac_romote_cb)
         val hdmi_cb = findViewById<CheckBox>(R.id.hdmi_cb)
@@ -109,7 +109,7 @@ class SelectEquipment : AppCompatActivity() {
         val laser_frame = findViewById<ImageButton>(R.id.laser_pen)
         val micro_frame = findViewById<ImageButton>(R.id.micro)
 
-        val broken = findViewById<Button>(R.id.broken)
+        val broken = findViewById<ImageButton>(R.id.broken)
         broken.setOnClickListener {
             val intent = Intent(this, Broken::class.java)
             intent.putExtra(Login.EMAIL_NAME, mail)
@@ -183,6 +183,12 @@ class SelectEquipment : AppCompatActivity() {
                 if (it.exists()) {
                     val lastState:String = it["LastState"].toString()
                         if (lastState == "Borrowed") {
+
+                            remote_frame.setBackgroundColor(Color.argb(100, 245, 245, 250))
+                            hdmi_frame.setBackgroundColor(Color.argb(100, 245, 245, 250))
+                            laser_frame.setBackgroundColor(Color.argb(100, 245, 245, 250))
+                            micro_frame.setBackgroundColor(Color.argb(100, 245, 245, 250))
+
                             ac_remote_cb.isEnabled = false
                             hdmi_cb.isEnabled = false
                             laser_pen_cb.isEnabled = false
@@ -198,41 +204,28 @@ class SelectEquipment : AppCompatActivity() {
 
                                     if (bits[0] == '1'){
                                         ac_cb.isChecked = true
-//                                        remote_frame.setBackgroundColor(0)
+                                        remote_frame.setBackgroundColor(Color.WHITE)
                                         remote_room.text = it["Last_Room"].toString()
                                     }
                                     if (bits[1] == '1'){
                                         hdm_cb.isChecked = true
-//                                        hdmi_frame.setBackgroundColor(0)
+                                        hdmi_frame.setBackgroundColor(Color.WHITE)
                                         hdmi_room.text = it["Last_Room"].toString()
                                     }
                                     if (bits[2] == '1'){
                                         laser_cb.isChecked = true
-//                                        laser_frame.setBackgroundColor(0)
+                                        laser_frame.setBackgroundColor(Color.WHITE)
                                         laser_room.text = it["Last_Room"].toString()
                                     }
                                     if (bits[3] == '1'){
                                         mic_cb.isChecked = true
-//                                        micro_frame.setBackgroundColor(0)
+                                        micro_frame.setBackgroundColor(Color.WHITE)
                                         micro_room.text = it["Last_Room"].toString()
                                     }
 
                                     val his = findViewById<TextView>(R.id.borrow_tm)
                                     val a = it["LastCheck"].toString().split("-")
                                     his.text = "${a[0]}/${a[1]}/${a[2]} ${a[3]}h:${a[4]}"
-
-                                    if (deviceID[3] == '1'){
-                                        remoteID = deviceID.take(3)
-                                    }
-                                    if (deviceID[3] == '2'){
-                                        hdmiID = deviceID.take(3)
-                                    }
-                                    if (deviceID[3] == '3'){
-                                        laserID = deviceID.take(3)
-                                    }
-                                    if (deviceID[3] == '4'){
-                                        microID = deviceID.take(3)
-                                    }
 
                                     if (remoteID == it["Last_Room"] && remote_room.length() == 3){
                                         ac_remote_cb.isChecked = true
@@ -249,8 +242,15 @@ class SelectEquipment : AppCompatActivity() {
 
                                 }
                             }
+
+
                             br_btn.text = "Hoàn trả thiết bị"
                         } else {
+
+                            ac_remote_cb.isEnabled = false
+                            hdmi_cb.isEnabled = false
+                            laser_pen_cb.isEnabled = false
+                            micro_cb.isEnabled = false
 
                             val his = findViewById<TextView>(R.id.borrow_tm)
                             val c:Calendar = Calendar.getInstance()
@@ -259,38 +259,78 @@ class SelectEquipment : AppCompatActivity() {
                                     " ${timeForm(c.get(Calendar.HOUR_OF_DAY))}h:" +
                                     timeForm(c.get(Calendar.MINUTE))
                             his.text = time
-                            if (deviceID[3] == '1'){
-                                remoteID = deviceID.take(3)
-                            }
-                            if (deviceID[3] == '2'){
-                                hdmiID = deviceID.take(3)
-                            }
-                            if (deviceID[3] == '3'){
-                                laserID = deviceID.take(3)
-                            }
-                            if (deviceID[3] == '4'){
-                                microID = deviceID.take(3)
-                            }
+//                            if (deviceID[3] == '1'){
+//                                remoteID = deviceID.take(3)
+//                            }
+//                            if (deviceID[3] == '2'){
+//                                hdmiID = deviceID.take(3)
+//                            }
+//                            if (deviceID[3] == '3'){
+//                                laserID = deviceID.take(3)
+//                            }
+//                            if (deviceID[3] == '4'){
+//                                microID = deviceID.take(3)
+//                            }
                             br_btn.text = "Mượn thiết bị"
                             if (remoteID.length == 3){
                                 ac_remote_cb.isChecked = true
+                                ac_remote_cb.isEnabled = true
                                 ac_cb.isChecked = true
                                 remote_room.setText(remoteID)
                             }
                             if (hdmiID.length == 3){
                                 hdmi_cb.isChecked = true
+                                hdmi_cb.isEnabled = true
                                 hdm_cb.isChecked = true
                                 hdmi_room.setText(hdmiID)
                             }
                             if (laserID.length == 3){
                                 laser_pen_cb.isChecked = true
+                                laser_pen_cb.isEnabled = true
                                 laser_cb.isChecked = true
                                 laser_room.setText(laserID)
                             }
                             if (microID.length == 3){
                                 micro_cb.isChecked = true
+                                micro_cb.isEnabled = true
                                 mic_cb.isChecked = true
                                 micro_room.setText(microID)
+                            }
+
+                            ac_remote_cb.setOnClickListener {
+                                if (!ac_remote_cb.isChecked){
+                                    remote_room.text = ""
+                                    ac_remote_cb.isEnabled = false
+                                    ac_cb.isChecked = false
+                                    remoteID = ""
+                                }
+                            }
+
+                            hdmi_cb.setOnClickListener {
+                                if (!hdmi_cb.isChecked){
+                                    hdmi_room.text = ""
+                                    hdmi_cb.isEnabled = false
+                                    hdm_cb.isChecked = false
+                                    hdmiID = ""
+                                }
+                            }
+
+                            laser_pen_cb.setOnClickListener {
+                                if (!laser_pen_cb.isChecked){
+                                    laser_room.text = ""
+                                    laser_pen_cb.isEnabled = false
+                                    laser_cb.isChecked = false
+                                    laserID = ""
+                                }
+                            }
+
+                            micro_cb.setOnClickListener {
+                                if (!micro_cb.isChecked){
+                                    micro_room.text = ""
+                                    micro_cb.isEnabled = false
+                                    mic_cb.isChecked = false
+                                    microID = ""
+                                }
                             }
                         }
                 }
@@ -356,8 +396,6 @@ class SelectEquipment : AppCompatActivity() {
                 "-${timeForm(c.get(Calendar.DATE))}" +
                 "-${timeForm(c.get(Calendar.HOUR_OF_DAY))}" +
                 "-${timeForm(c.get(Calendar.MINUTE))}"
-
-        Toast.makeText(applicationContext, "Xác nhận hoàn trả thiết bị!", Toast.LENGTH_SHORT).show()
 
         val intent = Intent(this, MainTab::class.java)
         intent.putExtra(Login.EMAIL_NAME, mail)
@@ -435,15 +473,15 @@ class SelectEquipment : AppCompatActivity() {
                     "-${timeForm(c.get(Calendar.DATE))}" +
                     "-${timeForm(c.get(Calendar.HOUR_OF_DAY))}" +
                     "-${timeForm(c.get(Calendar.MINUTE))}"
-            Toast.makeText(
-                applicationContext, "Xác nhận mượn thiết bị! $time", Toast.LENGTH_SHORT).show()
 
             val FStore : FirebaseFirestore = FirebaseFirestore.getInstance()
 
             val Subject = findViewById<TextView>(R.id.subject)
             val Period = findViewById<TextView>(R.id.period)
             val Room = findViewById<TextView>(R.id.room)
-            Room.setText(deviceID.take(3))
+            if (deviceID.length > 3) {
+                Room.setText(deviceID.take(3))
+            }
             val BrTime = time
             val RtTime = "_"
 
