@@ -129,7 +129,7 @@ class MainTab : AppCompatActivity() {
                             .collection("EquipmentState").document(borrow_time).set(items)
                         FStore.collection("History").document(transformEmail(mail))
                             .collection("EquipmentState").document("Last").set(items_last)
-                        Toast.makeText(this, "Quét mã thành công! $mail", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Quét mã thành công!", Toast.LENGTH_SHORT).show()
                         intent_.putExtra(Login.EMAIL_NAME, mail)
                         Thread.sleep(500)
                         startActivity(intent_)

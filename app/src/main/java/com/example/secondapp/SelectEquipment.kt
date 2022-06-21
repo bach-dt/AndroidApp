@@ -201,44 +201,49 @@ class SelectEquipment : AppCompatActivity() {
                                 .get().addOnSuccessListener {
                                 if (it.exists()) {
                                     val bits:String = it["Bits_AHLM"].toString()
+                                    FStore.collection("History")
+                                        .document(transformEmail(mail))
+                                        .collection("EquipmentState")
+                                        .document(it["LastCheck"].toString())
+                                        .get().addOnSuccessListener { lastDay ->
+                                            if (bits[0] == '1'){
+                                                ac_cb.isChecked = true
+                                                remote_frame.setBackgroundColor(Color.WHITE)
+                                                remote_room.text = lastDay["ac_remote"].toString()
+                                            }
+                                            if (bits[1] == '1'){
+                                                hdm_cb.isChecked = true
+                                                hdmi_frame.setBackgroundColor(Color.WHITE)
+                                                hdmi_room.text = lastDay["hdmi_wire"].toString()
+                                            }
+                                            if (bits[2] == '1'){
+                                                laser_cb.isChecked = true
+                                                laser_frame.setBackgroundColor(Color.WHITE)
+                                                laser_room.text = lastDay["laser_pen"].toString()
+                                            }
+                                            if (bits[3] == '1'){
+                                                mic_cb.isChecked = true
+                                                micro_frame.setBackgroundColor(Color.WHITE)
+                                                micro_room.text = lastDay["mcr_phone"].toString()
+                                            }
 
-                                    if (bits[0] == '1'){
-                                        ac_cb.isChecked = true
-                                        remote_frame.setBackgroundColor(Color.WHITE)
-                                        remote_room.text = it["Last_Room"].toString()
-                                    }
-                                    if (bits[1] == '1'){
-                                        hdm_cb.isChecked = true
-                                        hdmi_frame.setBackgroundColor(Color.WHITE)
-                                        hdmi_room.text = it["Last_Room"].toString()
-                                    }
-                                    if (bits[2] == '1'){
-                                        laser_cb.isChecked = true
-                                        laser_frame.setBackgroundColor(Color.WHITE)
-                                        laser_room.text = it["Last_Room"].toString()
-                                    }
-                                    if (bits[3] == '1'){
-                                        mic_cb.isChecked = true
-                                        micro_frame.setBackgroundColor(Color.WHITE)
-                                        micro_room.text = it["Last_Room"].toString()
-                                    }
+                                            val his = findViewById<TextView>(R.id.borrow_tm)
+                                            val a = it["LastCheck"].toString().split("-")
+                                            his.text = "${a[0]}/${a[1]}/${a[2]} ${a[3]}h:${a[4]}"
 
-                                    val his = findViewById<TextView>(R.id.borrow_tm)
-                                    val a = it["LastCheck"].toString().split("-")
-                                    his.text = "${a[0]}/${a[1]}/${a[2]} ${a[3]}h:${a[4]}"
-
-                                    if (remoteID == it["Last_Room"] && remote_room.length() == 3){
-                                        ac_remote_cb.isChecked = true
-                                    }
-                                    if (hdmiID == it["Last_Room"] && hdmi_room.length() == 3){
-                                        hdmi_cb.isChecked = true
-                                    }
-                                    if (laserID == it["Last_Room"] && laser_room.length() == 3){
-                                        laser_pen_cb.isChecked = true
-                                    }
-                                    if (microID == it["Last_Room"] && micro_room.length() == 3){
-                                        micro_cb.isChecked = true
-                                    }
+                                            if (remoteID == lastDay["ac_remote"] && remote_room.length() == 3){
+                                                ac_remote_cb.isChecked = true
+                                            }
+                                            if (hdmiID == lastDay["hdmi_wire"] && hdmi_room.length() == 3){
+                                                hdmi_cb.isChecked = true
+                                            }
+                                            if (laserID == lastDay["laser_pen"] && laser_room.length() == 3){
+                                                laser_pen_cb.isChecked = true
+                                            }
+                                            if (microID == lastDay["mcr_phone"] && micro_room.length() == 3){
+                                                micro_cb.isChecked = true
+                                            }
+                                        }
 
                                 }
                             }

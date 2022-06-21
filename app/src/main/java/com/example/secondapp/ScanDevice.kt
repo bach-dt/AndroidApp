@@ -52,26 +52,10 @@ class ScanDevice : AppCompatActivity() {
         val micro_cb = findViewById<CheckBox>(R.id.micro_cb)
         var deviceID = ""
 
-        if (ac_remote != null) {
-            if (ac_remote.length == 3){
-                ac_cb.isChecked = true
-            }
-        }
-        if (hdmi_wire != null) {
-            if (hdmi_wire.length == 3){
-                hdmi_cb.isChecked = true
-            }
-        }
-        if (laser_pen != null) {
-            if (laser_pen.length == 3){
-                laser_cb.isChecked = true
-            }
-        }
-        if (mcr_phone != null) {
-            if (mcr_phone.length == 3){
-                micro_cb.isChecked = true
-            }
-        }
+        ac_cb.isChecked = false
+        hdmi_cb.isChecked = false
+        laser_cb.isChecked = false
+        micro_cb.isChecked = false
 
         setupPermissions()
         val scannerView: CodeScannerView = findViewById(R.id.scanner_view)
