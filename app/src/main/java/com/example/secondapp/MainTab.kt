@@ -153,7 +153,7 @@ class MainTab : AppCompatActivity() {
                                     .collection("EquipmentState").document("Last")
                                     .update(items_last)
                             }
-                        Toast.makeText(this, "Quét mã thành công! $mail", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Quét mã thành công!", Toast.LENGTH_SHORT).show()
                         intent_.putExtra(Login.EMAIL_NAME, mail)
                         Thread.sleep(500)
                         startActivity(intent_)
